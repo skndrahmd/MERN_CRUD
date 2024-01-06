@@ -267,8 +267,8 @@ function Encoder() {
       "Cost of R22 Gas": updateForm["Cost of R22 Gas"],
       "Cost of Hazardouse Waste Disposal":
         updateForm["Cost of Hazardouse Waste Disposal"],
-      "Cost of Non-Hazardoose Waste Disposal":
-        updateForm["Cost of Non-Hazardoose Waste Disposal"],
+      "Cost of Non-Hazardouse Waste Disposal":
+        updateForm["Cost of Non-Hazardouse Waste Disposal"],
       "Total Production Volume (Pallets Issue)":
         updateForm["Total Production Volume (Pallets Issue)"],
       "Total Production Volume (Pallets Receive)":
@@ -794,9 +794,7 @@ function Encoder() {
                       onChange={handleUpdateFieldChange}
                       name="Cost of Non-Hazardouse Waste Disposal"
                       placeholder="Cost of Non-Hazardouse Waste Disposal"
-                      value={
-                        updateForm["Cost of Non-Hazardouse Waste Disposal"]
-                      }
+                      value={updateForm["Cost of Non-Hazardouse Waste Disposal"]}
                     />
 
                     <input
