@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import './encoder_css.css';
 function Encoder() {
   //current state is notes == change state is after setState
   const [notes, setNotes] = useState(null);
@@ -340,9 +340,9 @@ function Encoder() {
   return (
     <div className="App">
       <div>
-        <h1>Encoder</h1>
+        <h1>Data Encoder</h1>
 
-        <h2>Create record</h2>
+        <h2>Create Record</h2>
         <form onSubmit={createNote}>
           <input
             onChange={updateCreateForm}
@@ -595,13 +595,13 @@ function Encoder() {
             value={createForm.Comment}
           /> */}
 
-          <button type="submit" onClick={null}>
-            Create new record
+          <button className="createbtn" type="submit" onClick={null}>
+            Create New Record
           </button>
         </form>
       </div>
 
-      <h1>Records:</h1>
+      <h1>Data</h1>
       {notes &&
         notes.map((record) => {
           return (
@@ -613,7 +613,7 @@ function Encoder() {
 
               {updateForm._id && (
                 <div>
-                  <h2>Update record</h2>
+                  <h2>Update Record</h2>
                   <form onSubmit={update}>
                     <input
                       onChange={handleUpdateFieldChange}
@@ -876,14 +876,14 @@ function Encoder() {
                     />
 
                     <button type="submit" onClick={null}>
-                      Update record
+                      Update Record
                     </button>
                   </form>
                 </div>
               )}
-              <button onClick={() => updateNote(record)}>Edit record</button>
+              <button onClick={() => updateNote(record)}>Edit Record</button>
               <button onClick={() => deleteNote(record._id)}>
-                Delete record
+                Delete Record
               </button>
             </div>
           );
