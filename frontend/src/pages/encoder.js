@@ -339,9 +339,9 @@ function Encoder() {
 
   return (
     <div className="App">
-      <div>
-        <h1>Encoder</h1>
 
+        <h1>Encoder</h1>
+<div>
         <h2>Create record</h2>
         <form onSubmit={createNote}>
           <input
@@ -588,28 +588,32 @@ function Encoder() {
             value={createForm["Total Cost"]}
           />
 
-          {/* <textarea
-            onChange={updateCreateForm}
-            name="Comment"
-            placeholder="Comment"
-            value={createForm.Comment}
-          /> */}
-
           <button type="submit" onClick={null}>
             Create new record
           </button>
         </form>
-      </div>
+</div>
 
+<div>
       <h1>Records:</h1>
       {notes &&
         notes.map((record) => {
           return (
-            <div>
+
+            <div key={record._id}>
               <h2>{record.Year}</h2>
               <h4>{record.Month}</h4>
               <h4>{record._id}</h4>
               <h4>{record.Comment}</h4>
+
+              <button onClick={() => updateNote(record)}>Edit record</button>
+              <button onClick={() => deleteNote(record._id)}>
+                Delete record
+              </button>
+          </div>
+          )
+        })}
+</div>
 
               {updateForm._id && (
                 <div>
@@ -873,19 +877,13 @@ function Encoder() {
                       value={updateForm["Total Cost"]}
                     />
 
-                    <button type="submit" onClick={null}>
+                    <button type="submit">
                       Update record
                     </button>
                   </form>
                 </div>
               )}
-              <button onClick={() => updateNote(record)}>Edit record</button>
-              <button onClick={() => deleteNote(record._id)}>
-                Delete record
-              </button>
-            </div>
-          );
-        })}
+              
     </div>
   );
 }
