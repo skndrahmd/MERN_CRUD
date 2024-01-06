@@ -1,0 +1,112 @@
+/* General Styles */
+body {
+    font-family: Montserrat, sans-serif;
+    
+  }
+  
+  .App {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin: 20px;
+    overflow-x: scroll;
+    margin-left:20rem;
+    margin-right:20rem;
+    
+  }
+  
+  h1, h2  {
+    margin-bottom: 5px;
+    color: #000;
+    font-family: Montserrat;
+    font-size: 1.5625rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    
+  }
+  
+  /* Form Styles */
+  form {
+    
+    display: flex;
+    gap:0px;
+    margin-bottom: 2rem;
+    
+  }
+  
+  input {
+    padding: 2px;
+    flex: 1;
+    margin-right: 1px;
+  }
+  
+  button {
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    
+    border: none;
+    border-radius: 5px; /* Added border radius */
+    cursor: pointer;
+    margin-right: 10px; /* Added margin for spacing */
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Records Styles */
+  .records-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: scroll;
+    ;
+  }
+  
+  .record {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    position: relative; /* Added position relative for absolute positioning of buttons */
+  }
+  
+  /* Update Form Styles */
+  .update-form {
+    margin-top: 20px;
+  }
+  
+  /* Edit and Delete Button Styles */
+  .edit-btn, .delete-btn {
+    background-color: #008CBA;
+    color: #fff;
+    border: none;
+    border-radius: 5px; /* Added border radius */
+    padding: 8px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+  
+  .delete-btn {
+    background-color: #f44336;
+  }
+  
+  .edit-btn:hover, .delete-btn:hover {
+    background-color: #0077A3;
+  }
+  
+  /* Records Heading Alignment */
+  h1 + h1 {
+    text-align: left; /* Left-align the second h1 element (Records heading) */
+  }
+  
+  /* Button Positioning for Records */
+  .edit-btn, .delete-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+  }
+  
