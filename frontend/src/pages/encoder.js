@@ -267,8 +267,8 @@ function Encoder() {
       "Cost of R22 Gas": updateForm["Cost of R22 Gas"],
       "Cost of Hazardouse Waste Disposal":
         updateForm["Cost of Hazardouse Waste Disposal"],
-      "Cost of Non-Hazardoose Waste Disposal":
-        updateForm["Cost of Non-Hazardoose Waste Disposal"],
+      "Cost of Non-Hazardouse Waste Disposal":
+        updateForm["Cost of Non-Hazardouse Waste Disposal"],
       "Total Production Volume (Pallets Issue)":
         updateForm["Total Production Volume (Pallets Issue)"],
       "Total Production Volume (Pallets Receive)":
@@ -588,28 +588,31 @@ function Encoder() {
             value={createForm["Total Cost"]}
           />
 
-          {/* <textarea
-            onChange={updateCreateForm}
-            name="Comment"
-            placeholder="Comment"
-            value={createForm.Comment}
-          /> */}
-
           <button className="createbtn" type="submit" onClick={null}>
             Create New Record
           </button>
         </form>
-      </div>
+</div>
 
-      <h1>Data</h1>
+      <h1>Records:</h1>
       {notes &&
         notes.map((record) => {
           return (
-            <div>
+
+            <div key={record._id}>
               <h2>{record.Year}</h2>
               <h4>{record.Month}</h4>
               <h4>{record._id}</h4>
               <h4>{record.Comment}</h4>
+
+              <button onClick={() => updateNote(record)}>Edit record</button>
+              <button onClick={() => deleteNote(record._id)}>
+                Delete record
+              </button>
+          </div>
+          )
+        })}
+</div>
 
               {updateForm._id && (
                 <div>
@@ -794,9 +797,7 @@ function Encoder() {
                       onChange={handleUpdateFieldChange}
                       name="Cost of Non-Hazardouse Waste Disposal"
                       placeholder="Cost of Non-Hazardouse Waste Disposal"
-                      value={
-                        updateForm["Cost of Non-Hazardouse Waste Disposal"]
-                      }
+                      value={updateForm["Cost of Non-Hazardouse Waste Disposal"]}
                     />
 
                     <input
@@ -876,14 +877,14 @@ function Encoder() {
                     />
 
                     <button type="submit" onClick={null}>
-                      Update Record
+                      Update record
                     </button>
                   </form>
                 </div>
               )}
-              <button onClick={() => updateNote(record)}>Edit Record</button>
+              <button onClick={() => updateNote(record)}>Edit record</button>
               <button onClick={() => deleteNote(record._id)}>
-                Delete Record
+                Delete record
               </button>
             </div>
           );
