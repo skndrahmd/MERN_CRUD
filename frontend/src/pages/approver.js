@@ -221,7 +221,7 @@ function Approver() {
   return (
     <div className="App">
       <h1>Approver</h1>
-      
+
       <h1>Records:</h1>
       {notes &&
         notes.map((record) => {
@@ -230,11 +230,12 @@ function Approver() {
               <h2>{record.Year}</h2>
               <h4>{record.Month}</h4>
               <h4>{record.Comment}</h4>
+
               <button onClick={() => updateNote(record)}>Write comment</button>
             </div>
           );
         })}
-      
+
       {updateForm._id && (
         <div>
           <h2>Update note</h2>
@@ -251,11 +252,11 @@ function Approver() {
           </form>
         </div>
       )}
-  
+
       <button onClick={null}>Approve</button>
       <button onClick={null}>Send back to Encoder</button>
     </div>
   );
-      }  
+}
 
 export default Approver;
