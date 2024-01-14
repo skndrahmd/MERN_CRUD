@@ -101,10 +101,28 @@ function Publisher() {
       <h1>Notes:</h1>
       {notes &&
         notes.map((record) => {
+          const filteredRecord = Object.entries(record)
+            .filter(([key]) => key !== "_id" && key !== "__v")
+            .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+
+
+
           return (
             <div>
-              <h2>{record.Year}</h2>
-              <h4>{record.Month}</h4>
+             {Object.entries(filteredRecord).map(([heading, value], index) => (
+                <div
+                  key={index}
+                  style={{
+                    textAlign: "center",
+                    margin: "10px",
+                    padding: "10px",
+                    border: "1px solid #ddd",
+                  }}
+                >
+                  <h4 style={{ marginBottom: "5px" }}>{heading}</h4>
+                  <p>{value}</p>
+                </div>
+              ))}
             </div>
           );
         })}
