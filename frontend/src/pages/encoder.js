@@ -604,8 +604,8 @@ function Encoder() {
                 <h4>{record._id}</h4>
                 <h4>{record.Comment}</h4>
 
-                <button onClick={() => updateNote(record)}>Edit record</button>
-                <button onClick={() => deleteNote(record._id)}>
+                <button className="edit-btn" onClick={() => updateNote(record)}>Edit record</button>
+                <button className="delete-btn" onClick={() => deleteNote(record._id)}>
                   Delete record
                 </button>
               </div>

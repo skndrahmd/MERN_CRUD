@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import "./encoder_css.css";
 
 function Approver() {
   //current state is notes == change state is after setState
@@ -231,7 +232,7 @@ function Approver() {
               <h4>{record.Month}</h4>
               <h4>{record.Comment}</h4>
 
-              <button onClick={() => updateNote(record)}>Write comment</button>
+              <button className="approver_cmt" onClick={() => updateNote(record)}>Write comment</button>
             </div>
           );
         })}
