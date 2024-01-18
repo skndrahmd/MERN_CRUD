@@ -218,44 +218,97 @@ function Approver() {
 
     console.log(res.data);
   };
+  const columnNames = [
+    "Year",
+    "Month",
+    "Water Intake (Purchased)",
+    "Water Use (Sweat) - Use",
+    "Water Loss",
+    "Wastewater Disposal (Outside)",
+    "Total Energy",
+    "Energy Purchased (Electricity)",
+    "Energy (Diesel)",
+    "Total Waste",
+    "Total Hazardous Waste (Landfil)",
+    "Hazardous Waste (Stream # 1)",
+    "Hazardous Waste (Maintenace Oil)(With Density 0_93)",
+    "Total Non-Hazardous ( Landfill + Recycling)",
+    "Non-Hazardous Waste (Scrap Recycling))",
+    "Non-Hazardous Waste (Disposal)",
+    "Total GHG (CO2)",
+    "Total Consumption R22 Gas",
+    "Cost of Water (Sweat) Purchase_Treatment_Water Waste_Disposal",
+    "Cost of Purchased Electricity",
+    "Cost of Diesel",
+    "Cost of R22 Gas",
+    "Cost of Hazardouse Waste Disposal",
+    "Cost of Non-Hazardouse Waste Disposal",
+    "Total Production Volume (Pallets Issue)",
+    "Total Production Volume (Pallets Receive)",
+    "Total Area (Floor Covered Area)",
+    "Intensity - Water",
+    "Intensity - Energy",
+    "Intensity - Energy (Electricity)",
+    "Intensity - Energy (Diesel)",
+    "Intensity - GHG (CO2) - Scope 1 and 2",
+    "Intensity - Waste Material",
+    "Total Cost",
+    "Comment",
+  ];
 
   return (
     <div className="App">
-      <h1>Approver</h1>
-
-      <h1>Records:</h1>
+      <h1>DATA APPROVER</h1>
+      
+      <h2>Records</h2>
+      <div className="excel-header">
+      {columnNames.map((columnName, index) => (
+        <div key={index} className="box" style={{color:"white"}}>
+          <h4 style={{ margin: "0", whiteSpace: "nowrap" }} >{columnName}</h4>
+        </div>
+      ))}
+    </div>
       {notes &&
         notes.map((record) => {
-          return (
-            <div key={record._id}>
-              <h2>{record.Year}</h2>
-              <h4>{record.Month}</h4>
-              <h4>{record.Comment}</h4>
+          const filteredRecord = Object.entries(record)
+            .filter(([key]) => key !== "_id" && key !== "__v")
+            .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 
-              <button className="approver_cmt" onClick={() => updateNote(record)}>Write comment</button>
+          return (
+            <div className="record-2" key={record._id}>
+              {Object.entries(filteredRecord).map(([heading, value], index) => (
+                <div
+                  key={index} className="box" >
+                  <h4  style={{ color:"white" , margin: "0", whiteSpace: "nowrap" }}>{heading}</h4>
+                  <p>{value}</p>
+                </div>
+              ))}
+
+              <button className="btn" onClick={() => updateNote(record)}> Comment</button>
             </div>
           );
         })}
 
       {updateForm._id && (
-        <div>
-          <h2>Update note</h2>
+        <div style={{}}>
+          <h2>Comment</h2>
           <form onSubmit={update}>
             <textarea
               onChange={handleUpdateFieldChange}
               name="Comment"
-              placeholder="Comment"
+              placeholder="Write Your Comment Here"
               value={updateForm.Comment}
             />
-            <button type="submit" onClick={null}>
-              Confirm comment
+            <button className="btn" type="submit" onClick={null}>
+              Confirm Comment
             </button>
           </form>
         </div>
       )}
-
-      <button onClick={null}>Approve</button>
-      <button onClick={null}>Send back to Encoder</button>
+      <div style={{display:"flex"}}>
+      <button className="nav-btn" onClick={null}>Approve Data</button>
+      <button className="btn" style={{background:'#D32D28'}} onClick={null}>Send Back To Encoder</button>
+      </div>
     </div>
   );
 }
