@@ -37,7 +37,7 @@ const dataSchema = new mongoose.Schema({
         'Intensity - Waste Material': Number,
         'Total Cost': Number, 
         Comment: String
-})
+}, {strict: false})
 
 const Data = mongoose.model('Data', dataSchema);
 
