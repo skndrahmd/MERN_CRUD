@@ -93,6 +93,6 @@ async function importCSV() {
 }
 
 // Run the import
-importCSV();
+// importCSV();
 
 module.exports = connectToDb;

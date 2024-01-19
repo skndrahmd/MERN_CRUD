@@ -20,6 +20,26 @@ function Approver() {
     fetchNotes();
   }, []);
 
+  const confirm_publish = () => {
+    const confirm_publish_data = window.confirm(
+      "Confirm data? Send for publishing"
+    );
+    if (confirm_publish_data) {
+      alert("Data has been successfully sent to publisher!");
+    } else {
+      alert("Data not sent to publisher!");
+    }
+  };
+
+  const confirm_reject = () => {
+    const confirm_reject_data = window.confirm(
+      "Confirm data reject? Send back for revisions?"
+    );
+    if (confirm_reject_data) {
+      alert("Data sent back for revisions!");
+    }
+  };
+
   const fetchNotes = async () => {
     //fetch notes
     const res = await axios.get("http://localhost:3001/data");
@@ -111,112 +131,117 @@ function Approver() {
     // Prevent default form submit
     e.preventDefault();
 
-    // Construct updated record
-    const updatedRecord = {
-      Year: updateForm.Year,
-      Month: updateForm.Month,
-      "Water Intake (Purchased)": updateForm["Water Intake (Purchased)"],
-      "Water Use (Sweat) - Use": updateForm["Water Use (Sweat) - Use"],
-      "Water Loss": updateForm["Water Loss"],
-      "Wastewater Disposal (Outside)":
-        updateForm["Wastewater Disposal (Outside)"],
-      "Total Energy": updateForm["Total Energy"],
-      "Energy Pruchased (Electricity)":
-        updateForm["Energy Pruchased (Electricity)"],
-      "Energy (Diesel)": updateForm["Energy (Diesel)"],
-      "Total Waste": updateForm["Total Waste"],
-      "Total Hazardous Waste (Landfil)":
-        updateForm["Total Hazardous Waste (Landfil)"],
-      "Hazardous Waste (Stream # 1)":
-        updateForm["Hazardous Waste (Stream # 1)"],
-      "Hazardous Waste (Maintenace Oil) - (With Density 0.93)":
-        updateForm["Hazardous Waste (Maintenace Oil) - (With Density 0.93)"],
-      "Total Non-Hazardous ( Landfill + Recycling)":
-        updateForm["Total Non-Hazardous ( Landfill + Recycling)"],
-      "Non-Hazardous Waste (Scrap Recycling))":
-        updateForm["Non-Hazardous Waste (Scrap Recycling))"],
-      "Non-Hazardous Waste (Disposal)":
-        updateForm["Non-Hazardous Waste (Disposal)"],
-      "Total GHG (CO2)": updateForm["Total GHG (CO2)"],
-      "Total Consumption R22 Gas": updateForm["Total Consumption R22 Gas"],
-      "Cost of Water (Sweat) Purchase / Treatment / Water Waste Disposal":
-        updateForm[
-          "Cost of Water (Sweat) Purchase / Treatment / Water Waste Disposal"
-        ],
-      "Cost of Pruchased Electricity":
-        updateForm["Cost of Pruchased Electricity"],
-      "Cost of Diesel": updateForm["Cost of Diesel"],
-      "Cost of R22 Gas": updateForm["Cost of R22 Gas"],
-      "Cost of Hazardouse Waste Disposal":
-        updateForm["Cost of Hazardouse Waste Disposal"],
-      "Cost of Non-Hazardouse Waste Disposal":
-        updateForm["Cost of Non-Hazardouse Waste Disposal"],
-      "Total Production Volume (Pallets Issue)":
-        updateForm["Total Production Volume (Pallets Issue)"],
-      "Total Production Volume (Pallets Receive)":
-        updateForm["Total Production Volume (Pallets Receive)"],
-      "Total Area (Floor Covered Area)":
-        updateForm["Total Area (Floor Covered Area)"],
-      "Intensity - Water": updateForm["Intensity - Water"],
-      "Intensity - Energy": updateForm["Intensity - Energy"],
-      "Intensity - Energy (Electricity)":
-        updateForm["Intensity - Energy (Electricity)"],
-      "Intensity - Energy (Diesel)": updateForm["Intensity - Energy (Diesel)"],
-      "Intensity - GHG (CO2) - Scope 1 and 2":
-        updateForm["Intensity - GHG (CO2) - Scope 1 and 2"],
-      "Intensity - Waste Material": updateForm["Intensity - Waste Material"],
-      "Total Cost": updateForm["Total Cost"],
-      Comment: updateForm.Comment,
-    };
+    const confirm_comment = window.confirm("Comment confirmed?");
 
-    // Make PUT request to update
-    const res = await axios.put(
-      `http://localhost:3001/data/${updateForm._id}`,
-      updatedRecord
-    );
+    if (confirm_comment) {
+      // Construct updated record
+      const updatedRecord = {
+        Year: updateForm.Year,
+        Month: updateForm.Month,
+        "Water Intake (Purchased)": updateForm["Water Intake (Purchased)"],
+        "Water Use (Sweat) - Use": updateForm["Water Use (Sweat) - Use"],
+        "Water Loss": updateForm["Water Loss"],
+        "Wastewater Disposal (Outside)":
+          updateForm["Wastewater Disposal (Outside)"],
+        "Total Energy": updateForm["Total Energy"],
+        "Energy Pruchased (Electricity)":
+          updateForm["Energy Pruchased (Electricity)"],
+        "Energy (Diesel)": updateForm["Energy (Diesel)"],
+        "Total Waste": updateForm["Total Waste"],
+        "Total Hazardous Waste (Landfil)":
+          updateForm["Total Hazardous Waste (Landfil)"],
+        "Hazardous Waste (Stream # 1)":
+          updateForm["Hazardous Waste (Stream # 1)"],
+        "Hazardous Waste (Maintenace Oil) - (With Density 0.93)":
+          updateForm["Hazardous Waste (Maintenace Oil) - (With Density 0.93)"],
+        "Total Non-Hazardous ( Landfill + Recycling)":
+          updateForm["Total Non-Hazardous ( Landfill + Recycling)"],
+        "Non-Hazardous Waste (Scrap Recycling))":
+          updateForm["Non-Hazardous Waste (Scrap Recycling))"],
+        "Non-Hazardous Waste (Disposal)":
+          updateForm["Non-Hazardous Waste (Disposal)"],
+        "Total GHG (CO2)": updateForm["Total GHG (CO2)"],
+        "Total Consumption R22 Gas": updateForm["Total Consumption R22 Gas"],
+        "Cost of Water (Sweat) Purchase / Treatment / Water Waste Disposal":
+          updateForm[
+            "Cost of Water (Sweat) Purchase / Treatment / Water Waste Disposal"
+          ],
+        "Cost of Pruchased Electricity":
+          updateForm["Cost of Pruchased Electricity"],
+        "Cost of Diesel": updateForm["Cost of Diesel"],
+        "Cost of R22 Gas": updateForm["Cost of R22 Gas"],
+        "Cost of Hazardouse Waste Disposal":
+          updateForm["Cost of Hazardouse Waste Disposal"],
+        "Cost of Non-Hazardouse Waste Disposal":
+          updateForm["Cost of Non-Hazardouse Waste Disposal"],
+        "Total Production Volume (Pallets Issue)":
+          updateForm["Total Production Volume (Pallets Issue)"],
+        "Total Production Volume (Pallets Receive)":
+          updateForm["Total Production Volume (Pallets Receive)"],
+        "Total Area (Floor Covered Area)":
+          updateForm["Total Area (Floor Covered Area)"],
+        "Intensity - Water": updateForm["Intensity - Water"],
+        "Intensity - Energy": updateForm["Intensity - Energy"],
+        "Intensity - Energy (Electricity)":
+          updateForm["Intensity - Energy (Electricity)"],
+        "Intensity - Energy (Diesel)":
+          updateForm["Intensity - Energy (Diesel)"],
+        "Intensity - GHG (CO2) - Scope 1 and 2":
+          updateForm["Intensity - GHG (CO2) - Scope 1 and 2"],
+        "Intensity - Waste Material": updateForm["Intensity - Waste Material"],
+        "Total Cost": updateForm["Total Cost"],
+        Comment: updateForm.Comment,
+      };
 
-    fetchNotes();
+      // Make PUT request to update
+      const res = await axios.put(
+        `http://localhost:3001/data/${updateForm._id}`,
+        updatedRecord
+      );
 
-    setUpdateForm({
-      _id: null,
-      Year: "",
-      Month: "",
-      "Water Intake (Purchased)": "",
-      "Water Use (Sweat) - Use": "",
-      "Water Loss": "",
-      "Wastewater Disposal (Outside)": "",
-      "Total Energy": "",
-      "Energy Pruchased (Electricity)": "",
-      "Energy (Diesel)": "",
-      "Total Waste": "",
-      "Total Hazardous Waste (Landfil)": "",
-      "Hazardous Waste (Stream # 1)": "",
-      "Hazardous Waste (Maintenace Oil)(With Density 0_93)": "",
-      "Total Non-Hazardous ( Landfill + Recycling)": "",
-      "Non-Hazardous Waste (Scrap Recycling))": "",
-      "Non-Hazardous Waste (Disposal)": "",
-      "Total GHG (CO2)": "",
-      "Total Consumption R22 Gas": "",
-      "Cost of Water (Sweat) Purchase_Treatment_Water Waste_Disposal": "",
-      "Cost of Pruchased Electricity": "",
-      "Cost of Diesel": "",
-      "Cost of R22 Gas": "",
-      "Cost of Hazardouse Waste Disposal": "",
-      "Cost of Non-Hazardouse Waste Disposal": "",
-      "Total Production Volume (Pallets Issue)": "",
-      "Total Production Volume (Pallets Receive)": "",
-      "Total Area (Floor Covered Area)": "",
-      "Intensity - Water": "",
-      "Intensity - Energy": "",
-      "Intensity - Energy (Electricity)": "",
-      "Intensity - Energy (Diesel)": "",
-      "Intensity - GHG (CO2) - Scope 1 and 2": "",
-      "Intensity - Waste Material": "",
-      "Total Cost": "",
-      Comment: "",
-    });
+      fetchNotes();
 
-    console.log(res.data);
+      setUpdateForm({
+        _id: null,
+        Year: "",
+        Month: "",
+        "Water Intake (Purchased)": "",
+        "Water Use (Sweat) - Use": "",
+        "Water Loss": "",
+        "Wastewater Disposal (Outside)": "",
+        "Total Energy": "",
+        "Energy Pruchased (Electricity)": "",
+        "Energy (Diesel)": "",
+        "Total Waste": "",
+        "Total Hazardous Waste (Landfil)": "",
+        "Hazardous Waste (Stream # 1)": "",
+        "Hazardous Waste (Maintenace Oil)(With Density 0_93)": "",
+        "Total Non-Hazardous ( Landfill + Recycling)": "",
+        "Non-Hazardous Waste (Scrap Recycling))": "",
+        "Non-Hazardous Waste (Disposal)": "",
+        "Total GHG (CO2)": "",
+        "Total Consumption R22 Gas": "",
+        "Cost of Water (Sweat) Purchase_Treatment_Water Waste_Disposal": "",
+        "Cost of Pruchased Electricity": "",
+        "Cost of Diesel": "",
+        "Cost of R22 Gas": "",
+        "Cost of Hazardouse Waste Disposal": "",
+        "Cost of Non-Hazardouse Waste Disposal": "",
+        "Total Production Volume (Pallets Issue)": "",
+        "Total Production Volume (Pallets Receive)": "",
+        "Total Area (Floor Covered Area)": "",
+        "Intensity - Water": "",
+        "Intensity - Energy": "",
+        "Intensity - Energy (Electricity)": "",
+        "Intensity - Energy (Diesel)": "",
+        "Intensity - GHG (CO2) - Scope 1 and 2": "",
+        "Intensity - Waste Material": "",
+        "Total Cost": "",
+        Comment: "",
+      });
+    } else {
+      alert("No comment added to this record!");
+    }
   };
   const columnNames = [
     "Year",
@@ -259,15 +284,15 @@ function Approver() {
   return (
     <div className="App">
       <h1>DATA APPROVER</h1>
-      
+
       <h2>Records</h2>
       <div className="excel-header">
-      {columnNames.map((columnName, index) => (
-        <div key={index} className="box" style={{color:"white"}}>
-          <h4 style={{ margin: "0", whiteSpace: "nowrap" }} >{columnName}</h4>
-        </div>
-      ))}
-    </div>
+        {columnNames.map((columnName, index) => (
+          <div key={index} className="box" style={{ color: "white" }}>
+            <h4 style={{ margin: "0", whiteSpace: "nowrap" }}>{columnName}</h4>
+          </div>
+        ))}
+      </div>
       {notes &&
         notes.map((record) => {
           const filteredRecord = Object.entries(record)
@@ -277,14 +302,24 @@ function Approver() {
           return (
             <div className="record-2" key={record._id}>
               {Object.entries(filteredRecord).map(([heading, value], index) => (
-                <div
-                  key={index} className="box" >
-                  <h4  style={{ color:"white" , margin: "0", whiteSpace: "nowrap" }}>{heading}</h4>
+                <div key={index} className="box">
+                  <h4
+                    style={{
+                      color: "white",
+                      margin: "0",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {heading}
+                  </h4>
                   <p>{value}</p>
                 </div>
               ))}
 
-              <button className="btn" onClick={() => updateNote(record)}> Comment</button>
+              <button className="btn" onClick={() => updateNote(record)}>
+                {" "}
+                Comment
+              </button>
             </div>
           );
         })}
@@ -300,14 +335,24 @@ function Approver() {
               value={updateForm.Comment}
             />
             <button className="btn" type="submit" onClick={null}>
-              Confirm Comment
+              {"Confirm comment"}
             </button>
           </form>
         </div>
       )}
-      <div style={{display:"flex"}}>
-      <button className="nav-btn" onClick={null}>Approve Data</button>
-      <button className="btn" style={{background:'#D32D28'}} onClick={null}>Send Back To Encoder</button>
+      <div style={{ display: "flex" }}>
+        <button className="nav-btn" onClick={confirm_publish}>
+          Approve Data
+        </button>{" "}
+        
+        <button
+          className="btn"
+          style={{ background: "#D32D28" }}
+          onClick={confirm_reject}
+        >
+          Send Back To Encoder
+        </button>{" "}
+       
       </div>
     </div>
   );

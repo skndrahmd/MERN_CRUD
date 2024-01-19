@@ -4,15 +4,6 @@ import "./encoder_css.css";
 function Publisher() {
   //current state is notes == change state is after setState
   const [notes, setNotes] = useState(null);
-  const [createForm, setCreateForm] = useState({
-    title: "",
-    body: "",
-  });
-  const [updateForm, setUpdateForm] = useState({
-    _id: null,
-    title: '',
-    body: ''
-  })
 
   //Any function in this is executed as soon as the window is loaded..
   useEffect(() => {
@@ -24,73 +15,24 @@ function Publisher() {
     const res = await axios.get("http://localhost:3001/data");
     //set to state
     setNotes(res.data.data);
-    // console.log(res.data.notes);
   };
 
-  const updateCreateForm = (e) => {
-    const { name, value } = e.target;
-
-    setCreateForm({
-      //this duplicates the object in the usestate
-      ...createForm,
-      [name]: value,
-    });
-  };
-
-  const createNote = async (e) => {
-    e.preventDefault();
-    //create the note
-    const res = await axios.post("http://localhost:3001/notes", createForm);
-    fetchNotes();
-
-    //clear form state
-    setCreateForm({
-      title: "",
-      body: "",
-    });
-    // console.log(res)
-  };
-
-  const deleteNote = async (_id) => {
-    const res = await axios.delete(`http://localhost:3001/notes/${_id}`);
-    fetchNotes();
-    //console.log(res)
-  };
-
-  const handleUpdateFieldChange = async (e) => {
-    const { value, name } = e.target;
-
-    setUpdateForm({
-      ...updateForm,
-      [name]: value
-    })
-
+  const confirm_publish = () => {
+    const confirm_publish_data = window.confirm("Confirm data publish?")
+    if (confirm_publish_data){
+      alert("Data has been successfully published!")
+    }else {
+      alert("Data not published!")
+    }
   }
 
-  const updateNote = async (note) => {
-
-    //get current note values
-    setUpdateForm({ title: note.title, body: note.body, _id: note._id })
-    console.log(note)
-
-    //set state on update form
-  };
-
-  const update = async (e) => {
-    e.preventDefault()
-    const { title, body } = updateForm
-
-    const res = await axios.put(`http://localhost:3001/notes/${updateForm._id}`, { title, body });
-
-    fetchNotes()
-
-    setUpdateForm({
-      _id: null,
-      title: '',
-      body: ''
-    })
-    console.log(res)
+  const confirm_reject = () => {
+    const confirm_reject_data = window.confirm("Confirm data reject? Send back for revisions?")
+    if (confirm_reject_data){
+      alert("Data sent back for revisions!")
+    }
   }
+
   const columnNames = [
     "Year",
     "Month",
@@ -136,12 +78,14 @@ function Publisher() {
 
       <h2>Records</h2>
       <div className="excel-header">
-      {columnNames.map((columnName, index) => (
-        <div key={index} className="box" style={{color:"white"}}>
-          <h4 style={{ margin: "0px", whiteSpace: "nowrap" }}>{columnName}</h4>
-        </div>
-      ))}
-    </div>
+        {columnNames.map((columnName, index) => (
+          <div key={index} className="box" style={{ color: "white" }}>
+            <h4 style={{ margin: "0px", whiteSpace: "nowrap" }}>
+              {columnName}
+            </h4>
+          </div>
+        ))}
+      </div>
       {notes &&
         notes.map((record) => {
           const filteredRecord = Object.entries(record)
@@ -150,20 +94,33 @@ function Publisher() {
           return (
             <div className="record-2">
               {Object.entries(filteredRecord).map(([heading, value], index) => (
-                <div
-                  key={index}
-                  className="box"
-                >
-                  <h4 style={{ color:"white" , margin: "0px", whiteSpace: "nowrap" }}>{heading}</h4>
+                <div key={index} className="box">
+                  <h4
+                    style={{
+                      color: "white",
+                      margin: "0px",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {heading}
+                  </h4>
                   <p>{value}</p>
                 </div>
               ))}
             </div>
           );
         })}
-        <div style={{display:"flex"}}>
-      <button className="nav-btn" onClick={null}>Publish Data</button>
-      <button className="btn" style={{background:'#D32D28'}} onClick={null}>Reject Data</button>
+      <div style={{ display: "flex" }}>
+        <button className="nav-btn" onClick={confirm_publish}>
+          Publish Data
+        </button>
+        <button
+          className="btn"
+          style={{ background: "#D32D28" }}
+          onClick={confirm_reject}
+        >
+          Reject Data
+        </button>
       </div>
     </div>
   );
