@@ -160,6 +160,7 @@ function Encoder() {
       Comment: "",
     });
     // console.log(res)
+    alert("Record successfully added!")
   };
 
   const deleteNote = async (_id) => {
@@ -169,6 +170,7 @@ function Encoder() {
     if (confirm) {
       const res = await axios.delete(`http://localhost:3001/data/${_id}`);
       fetchNotes();
+      alert("Record successfully deleted!")
     } else {
       alert("Record not deleted!");
     }
@@ -356,6 +358,7 @@ function Encoder() {
         "Total Cost": "",
         Comment: "",
       });
+      alert("Record successfully updated!")
     } else {
       alert("Record not updated!");
     }
