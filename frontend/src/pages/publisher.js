@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./encoder_css.css";
+import Swal from "sweetalert2"
 function Publisher() {
   //current state is notes == change state is after setState
   const [notes, setNotes] = useState(null);
@@ -18,20 +19,46 @@ function Publisher() {
   };
 
   const confirm_publish = () => {
-    const confirm_publish_data = window.confirm("Confirm data publish?")
-    if (confirm_publish_data){
-      alert("Data has been successfully published!")
-    }else {
-      alert("Data not published!")
-    }
-  }
+    Swal.fire({
+      title: "Are You Sure ?",
+      text: "Data will be published !",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Publish !"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Success !",
+          text: "Your Data has been successfuly Published !",
+          icon: "success"
+        });
+      }
+    });
+
+  };
 
   const confirm_reject = () => {
-    const confirm_reject_data = window.confirm("Confirm data reject? Send back for revisions?")
-    if (confirm_reject_data){
-      alert("Data sent back for revisions!")
-    }
-  }
+    Swal.fire({
+      title: "Are You Sure ?",
+      text: "Data will be sent back for revisions !",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Send Back !"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Success!",
+          text: "Data has been sent for revisions !",
+          icon: "success"
+        });
+      }
+    });
+
+  };
 
   const columnNames = [
     "Year",

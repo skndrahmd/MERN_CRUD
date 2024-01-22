@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Swal from 'sweetalert2'
+
 import "./encoder_css.css";
 function Encoder() {
   //current state is notes == change state is after setState
@@ -85,15 +87,25 @@ function Encoder() {
     fetchNotes();
   }, []);
 
-
-
+  
   const send_data = () => {
-    const confirm_send = window.confirm("Send data for approval?")
-    if (confirm_send){
-      alert("Data sent for approval!")
-    }else {
-      alert("Data not sent for approval!")
-    }
+    Swal.fire({
+      title: "Are You Sure ?",
+      text: "Data Will Be Sent to the Approver !",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, send it !"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Success !",
+          text: "Your Data Has Been Sent To The Approver !",
+          icon: "success"
+        });
+      }
+    });
   }
 
 

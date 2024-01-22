@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./encoder_css.css";
-
+import Swal from 'sweetalert2'
 function Approver() {
   //current state is notes == change state is after setState
   const [notes, setNotes] = useState(null);
@@ -21,23 +21,44 @@ function Approver() {
   }, []);
 
   const confirm_publish = () => {
-    const confirm_publish_data = window.confirm(
-      "Confirm data? Send for publishing"
-    );
-    if (confirm_publish_data) {
-      alert("Data has been successfully sent to publisher!");
-    } else {
-      alert("Data not sent to publisher!");
-    }
+    Swal.fire({
+      title: "Are You Sure ?",
+      text: "Data will be sent to the publisher !",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, send it !"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Success !",
+          text: "Your Data Has Been Sent To The Publisher !",
+          icon: "success"
+        });
+      }
+    });
+
   };
 
   const confirm_reject = () => {
-    const confirm_reject_data = window.confirm(
-      "Confirm data reject? Send back for revisions?"
-    );
-    if (confirm_reject_data) {
-      alert("Data sent back for revisions!");
-    }
+    Swal.fire({
+      title: "Are You Sure ?",
+      text: "Data will be sent back for revisions !",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, send it !"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Success !",
+          text: "Your Data Has Been Sent Back To The Encoder !",
+          icon: "success"
+        });
+      }
+    });
   };
 
   const fetchNotes = async () => {
@@ -131,8 +152,8 @@ function Approver() {
     // Prevent default form submit
     e.preventDefault();
 
-    const confirm_comment = window.confirm("Comment confirmed?");
-
+    const confirm_comment = Swal.fire("Comment Confirmed !");
+    Swal.fire("Comment Confirmed !");
     if (confirm_comment) {
       // Construct updated record
       const updatedRecord = {
@@ -192,7 +213,7 @@ function Approver() {
         "Total Cost": updateForm["Total Cost"],
         Comment: updateForm.Comment,
       };
-
+      
       // Make PUT request to update
       const res = await axios.put(
         `http://localhost:3001/data/${updateForm._id}`,
